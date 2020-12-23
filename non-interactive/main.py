@@ -74,14 +74,14 @@ args = mainparser.parse_args()
 # Define 'project' argument actions here
 if args.project:
 	project = args.project
-	# Create project folder
 	try:
+		# Create the project folder
 		os.mkdir(project[0])
-		print('> Initializing project [%s]...' % project[0])
-		print('> Creating folder for project [%s]...' % project[0])
-		print('> Project folder [%s] created...' % project[0])
+		print(f'> Initializing project [{project[0]}]...')
+		print(f'> Creating folder for project [{project[0]}]...')
+		print(f'> Project folder [{project[0]}] created...')
 	except:
-		print('Project [%s] alreaedy exists...' % project[0])
+		print(f'Project [{project[0]}] alreaedy exists...')
 		sys.exit(1)
 
 # Define '--add-readme' actions here
@@ -90,20 +90,22 @@ if args.add_readme:
 	readme = args.add_readme
 
 	if 'yes' in readme:
+		# Check that folder's been created
 		if project:
 			
 			try:
+				# Go to the created folder
 				os.chdir(project[0])
 			except RuntimeError:
 				print('Error occured during runtime, exiting...')
 				sys.exit(1)
 
 			try:
+				# Create the README
 				with open('README.md', 'w', encoding='utf-8') as f:
 					f.write('')
 				print('> Creating README.md file...')
 				print('> README.md file created...')
-				print('> Project [%s] successfully created!' % project[0])
 
 			except UnicodeError:
 				print('Unicode related error occured...')
@@ -111,4 +113,6 @@ if args.add_readme:
 
 	elif 'no' in readme:
 		print('> Skipping README.md file creation... [YOU CAN CREATE IT LATER!]')
-		print('> Project [%s] successfully created!' % project[0])
+
+	# Print this at the end of the initialization
+	print(f'> Project [{project[0]}] successfully created!')
