@@ -1,5 +1,6 @@
 ## Pinit (Project Initializer)
 Pinit is a command line tool that is intended to be used to improve your progamming workflow.
+Basic use is `pinit [PROJECT] [OPTIONS]`
 
 ## Installation
 **Clone**
@@ -11,7 +12,7 @@ git clone https://github.com/nikkelarsson/Pinit.git
 1. Either run it with `python3`
 2. Or compile it and run as binary
 
-**Run with pyhton**
+**Run with python**
 ```
 python3 main.py
 ```
@@ -50,4 +51,9 @@ pinit myproject
 or
 ```
 pinit myproject --add-readme=no
+```
+
+**Silence output**
+```
+pinit myproject --silent
 ```
