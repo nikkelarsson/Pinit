@@ -1,6 +1,15 @@
 ## Pinit (Project Initializer)
 Pinit is a command line tool that is intended to be used to improve your progamming workflow.
+
 Basic use is `pinit [PROJECT] [OPTIONS]`
+
+## List of available flags
+- `--add-readme` to create readme file during project initialization
+- `--add-gitignore` to create gitignore file during init
+- `NAME` to choose a name for the project that is going to be created
+
+These are not all the available flags, but using `--help` or `-h` you get the full list
+of available ones.
 
 ## Installation
 **Clone**
@@ -56,4 +65,14 @@ pinit myproject --add-readme=no
 **Silence output**
 ```
 pinit myproject --silent
+```
+
+**Create a project with .gitignore**
+```
+pinit myproject --add-gitignore
+```
+
+**Create a project with both README.md + .gitignore**
+```
+pinit myproject --add-gitignore --add-readme
 ```
