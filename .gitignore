@@ -1,1 +1,4 @@
-__pycache__/
+argparse/
+about.txt
+TEMP_LOG.txt
+.DS_Store

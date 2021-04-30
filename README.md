@@ -1,78 +1,103 @@
-## Pinit (Project Initializer)
-Pinit is a command line tool that is intended to be used to improve your progamming workflow.
+# Pinit (Project Initializer)
 
-Basic use is `pinit [PROJECT] [OPTIONS]`
+Pinit is an efficient and easy-to-use tool for
+starting a new project, as it creates all the
+necessary files that you'd probably create anyway.
 
-## List of available flags
-- `--add-readme` to create readme file during project initialization
-- `--add-gitignore` to create gitignore file during init
-- `NAME` to choose a name for the project that is going to be created
-
-These are not all the available flags, but using `--help` or `-h` you get the full list
-of available ones.
+![Screenshot](photos/CreateGif.gif)
 
 ## Installation
-**Clone**
-```
+
+``` bash
 git clone https://github.com/nikkelarsson/Pinit.git
 ```
 
-## How to use Pinit
-1. Either run it with `python3`
-2. Or compile it and run as binary
+## Requirements
 
-**Run with python**
-```
-python3 main.py
+* python >= 3
+
+* Add other requirements here...
+
+## Getting started
+
+You can run Pinit as is with the Python interpreter
+every time you want to use it.
+
+However, this is not the most efficient way of using it.
+
+A better way of using Pinit is by compiling it and then
+putting the binary somewhere appropriate.
+
+For this, Python module called `nuitka` comes in.
+
+What `nuitka` does is it transforms the python code
+into c code, and then compiles the c code.
+
+You could also create a `bin` folder somewhere, add
+that folder to your `PATH` and use Pinit that way.
+Obviously the name isn't important – you can name
+the folder what ever you want, `programs` for example,
+but `bin` is usually quite recognizable name thus
+a good choice for this.
+This way you don't have to put the binary somewhere
+you don't know. You can add the `bin` into your
+`PATH` by adding the following either in .bashrc *or*
+.zshrc:
+
+``` bash
+export PATH="path/to/your/bin/folder:$PATH"
 ```
 
-**Compile and run as binary**
-* First compile (`nuitka` works good for this)
-```
-python3 -m nuitka --follow-imports main.py
+For your knowledge, there is an installation script
+that compiles Pinit for you. So, if you don't want to
+do the compiling yourself, just use the install script!
+
+### Compile manually
+
+``` bash
+python3 -m nuitka -o pinit --remove-output main.py
 ```
 
-* After compiling you'll have `main.bin` (Mac) or just `main` (Linux)
-* Then you can rename `main.bin` (or `main`) to `pinit` and use as is
+Using the `--remove-output` nuitka will not produce
+the `build` directory it usually would after compiling;
+this is just to avoid extra cleaning.
+
+### Install using the installation script
+
+``` bash
+chmod +x install.sh
 ```
+
+``` bash
+./install.sh
+```
+
+And that should do it!  
+Now you have the binary, `pinit`.
+You can test that it works by invoking:
+
+``` bash
 ./pinit
 ```
 
-* Or move the binary somewhere more appropriate, like `usr/local/bin` and then run:
-```
-pinit
+It should print the usage message for you.
+
+Now you can create the `bin` folder, add it to your
+`PATH` and either *move the binary*  or *symlink it* there, either way will work though symlinking is maybe
+smarter solution as you don't have to move files around.
+
+### Symlink
+
+``` bash
+ln -s pinit /path/to/your/bin/folder/
 ```
 
-## Project creation
-**Create a project with README.md**
-```
-pinit myproject --add-readme
-```
-or
-```
-pinit myproject --add-readme=yes
-```
+And... done! Now you can start using Pinit!
 
-**Create a project without README.md**
-```
-pinit myproject
-```
-or
-```
-pinit myproject --add-readme=no
-```
+## Usage
 
-**Silence output**
-```
-pinit myproject --silent
-```
+This is the basic usage.
 
-**Create a project with .gitignore**
-```
-pinit myproject --add-gitignore
-```
-
-**Create a project with both README.md + .gitignore**
-```
-pinit myproject --add-gitignore --add-readme
+``` bash
+pinit [OPTIONS] create <PROJECT_NAME>
 ```
