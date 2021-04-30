@@ -1,0 +1,24 @@
+To Do For ”--init-as-git”
+¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+
+PROBLEMS!
+Right now I have not found a way to solve how can I pass the 2FA-step in the
+login process, as I can't get user's input to be forwarded to the browser.
+The program otherwise works PERFECTLY, until the 2FA comes in.
+
+QUICK NOTE!
+The folder and readme.md etc. need to be created first, when using
+--init-as-git as git needs to go to the project folder just created, and
+then do the ”init” inside there. So don't accidentally try to init the
+folder you're in as that would mess things up!
+
+1. [x] Init dir as git repo.
+2. [] Log in to GitHub.
+   1. [x] Input your email and password (use sys.argv).
+   2. [] Input your Authy token (again, use sys.argv).
+3. [] Click ”Create new repository”.
+4. [] Enter name for the repository (use the name that was used as a name
+   for the project).
+5. [] Enter additional description for the project (this can be skipped).
+6. [] Select public / private.
+7. [] Finally, click ”Create repository”.
