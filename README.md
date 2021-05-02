@@ -14,7 +14,7 @@ git clone https://github.com/nikkelarsson/Pinit.git
 
 ## Requirements
 
-* python >= 3
+* `python >= 3`
 
 * Add other requirements here...
 
