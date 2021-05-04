@@ -13,27 +13,26 @@ import os
 # as an argument would make create() work unexpectedly.
 def files(*files, language='eng', verbose=False, project_type='python', gitrepo=False):
 	'''Create the files that make the project, like the root dir etc.'''
-
-    count = 0
-    fwd_slashes = 0
+	count = 0
+	fwd_slashes = 0
 	username = getpass.getuser()
 
 	for new_file in files:
-        if count == 0:
+		if count == 0:
 
             # Allow using the ”~/” abbreviation: it's nicer to write less.
-            if new_file[0][0:1] == '~/':
-                new_file.replace('~/', '/Users/{}/'.format(username))
+			if new_file[0][0:1] == '~/':
+				new_file.replace('~/', '/Users/{}/'.format(username))
 
             # To avoid problems, prohibit the use of ”-” as a prefix in filenames.
-            if new_file[0][0] == '-':
-                return 'INVALID_FILENAME_USED'
+			if new_file[0][0] == '-':
+				return 'INVALID_FILENAME_USED'
 
-            elif new_file[0][0:1] == '-':
-                return 'INVALID_FILENAME_USED'
+			elif new_file[0][0:1] == '-':
+				return 'INVALID_FILENAME_USED'
 
-            if os.path.exists(new_file[0]):
-                return 'FILE_ALREADY_EXISTS'
+			if os.path.exists(new_file[0]):
+				return 'FILE_ALREADY_EXISTS'
 
 			# NOTE: WHAT THIS SECTION BELOW EVEN DOES?
 			# ----------------------------------------
@@ -44,12 +43,12 @@ def files(*files, language='eng', verbose=False, project_type='python', gitrepo=
             # is the last word in the path -> path/to/myproject ->
 			# ”myproject” and that is the word we need to extract
 			# from the path.
-            for filename in new_file:
-                letters = filename[0:].split()
-                for letter in letters:
-                    if letter == '/':
-                        fwd_slashes += 1
-            return letters
+			for filename in new_file:
+				letters = filename[0:].split()
+				for letter in letters:
+					if letter == '/':
+						fwd_slashes += 1
+			return letters
 
             # When a project is created in a location other than the current working directory,
             # extract the name used for the project from the path.

@@ -1,7 +1,7 @@
 
 '''
-file : main.py
-desc : Body for the main program.
+File : main.py
+Desc : Body for the main program.
 '''
 
 # Imports are sorted alphabetically here.
@@ -12,67 +12,69 @@ import os
 import requests
 import sys
 
-args = sys.argv
-commands = cmds.commands
-flags = cmds.flags
-__program__ = cfg.name
-__version__ = cfg.version
-__language__ = cfg.language
+args         : list = sys.argv
+commands     : dict = cmds.commands
+flags        : dict = cmds.flags
+__program__  : str = cfg.name
+__version__  : str = cfg.version
+__language__ : str = cfg.language
 
-if len(args) < 2:
-	cmds.usage.get(pname=__program__, language=__language__)
-	sys.exit(1)
+if __language__ == 'fi':
+	descriptions = cmds.help.Finnish(__program__, __version__)
+elif __language__ == 'eng':
+	descriptions = cmds.help.English(__program__, __version__)
 
-elif len(args) >= 2:
-	if args[1] == flags['version']['short']:
-		if args[2:]: sys.exit(1)
-		cmds.version.get(pname=__program__, version=__version__)
-	elif args[1] == flags['version']['long']:
-		if args[2:]: sys.exit(1)
-		cmds.version.get(pname=__program__, version=__version__)
-	elif args[1] == flags['help']['short']:
-		if args[2:]: sys.exit(1)
-		cmds.help.get(pname=__program__, version=__version__, language=__language__)
-	elif args[1] == flags['help']['long']:
-		if args[2:]: sys.exit(1)
-		cmds.help.get(pname=__program__, version=__version__, language=__language__)
+def main():
+	if len(args) < 2:
+		descriptions.usage()
+		sys.exit(1)
 
-	elif args[1] == flags['verbose']['short']:
-		if args[2:]:
-			if args[2] == commands['create']['long']:
-				if args[3:]:
-					verbose_message = cmds.create.files(args[3:], language=__language__, verbose=True)
-					if verbose_message == 'INVALID_FILENAME_USED':
-						errs.file.has_invalid_filename(name=args[3], language=__language__)
-						sys.exit(1)
-					elif verbose_message == 'FILE_ALREADY_EXISTS':
-						errs.file.exists(name=args[3], language=__language__)
-						sys.exit(1)
-					elif verbose_message == 'FILE_NOT_FOUND':
-						errs.file.not_found(name=args[3], language=__language__)
-						sys.exit(1)
+	elif len(args) >= 2:
+		if args[1] == flags['version']['short']:
+			if args[2:]: sys.exit(1)
+			cmds.version.get(__program__, __version__)
+		elif args[1] == flags['version']['long']:
+			if args[2:]: sys.exit(1)
+			cmds.version.get(__program__, __version__)
+		elif args[1] == flags['help']['short']:
+			if args[2:]: sys.exit(1)
+			descriptions.descriptions()
+		elif args[1] == flags['help']['long']:
+			if args[2:]: sys.exit(1)
+			descriptions.descriptions()
+
+		elif args[1] == flags['verbose']['short']:
+			if args[2:]:
+				if args[2] == commands['create']['long']:
+					if args[3:]:
+						verbose_message = cmds.create.files(args[3:], language=__language__, verbose=True)
+						if verbose_message == 'INVALID_FILENAME_USED':
+							errs.file.invalid_filename(name=args[3], language=__language__)
+							sys.exit(1)
+						elif verbose_message == 'FILE_ALREADY_EXISTS':
+							errs.file.exists(name=args[3], language=__language__)
+							sys.exit(1)
+						elif verbose_message == 'FILE_NOT_FOUND':
+							errs.file.not_found(path=args[3], language=__language__)
+							sys.exit(1)
+						else:
+							print(verbose_message)
 					else:
-						print(verbose_message)
+						errs.file.name_missing(language=__language__)
+						sys.exit(1)
 				else:
-					errs.file.name_missing(language=program_language)
+					errs.command.is_invalid(cmd=args[2], language=__language__)
 					sys.exit(1)
 			else:
-				errs.command.is_invalid(cmd=args[2], language=__language__)
 				sys.exit(1)
-		else:
-			sys.exit(1)
+
+if __name__ == '__main__':
+	main()
 
 
 
 
 
-
-	elif args[1] == commands['verbose']['long']:
-		pass
-
-	else:
-		#error.invalid_command(cmd=args[1])
-		sys.exit(1)
 
 # if len(sys.argv) == 2:
 # 	if sys.argv[1] == flags['create']['long']:

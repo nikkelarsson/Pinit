@@ -1,9 +1,8 @@
 '''
-file : version.py  
-desc : Management of printing Pinit's version.
+File : version.py  
+Desc : Version description.
 '''
 
-def get(pname, version):
+def get(program: str, version: str):
 	'''Print Pinit's current version.'''
-	
-	print('{} {}'.format( pname[0].upper() + pname[1:].lower(), version ))
+	print('{0} {1}'.format( program[0].upper() + program[1:].lower(), version ))

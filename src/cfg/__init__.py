@@ -1,8 +1,6 @@
 '''
-    *********************************************************
-	* file : __init__.py
-	* desc : Basic configurations.
-	*********************************************************
+File : __init__.py
+Desc : Basic configurations.
 '''
 
 name = 'pinit'

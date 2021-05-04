@@ -1,6 +1,6 @@
 '''
-file : help.py  
-desc : Management of printing command and flag descriptions.
+File : help.py  
+Desc : Command and usage descriptions.
 '''
 
 #
@@ -13,24 +13,46 @@ desc : Management of printing command and flag descriptions.
 #     -f,  --flags-here               Description here.
 #
 
-import cmds.descs.cmd
-import cmds.descs.usg 
+import textwrap
 
-def get(pname, version, language='eng'):
-	'''Print descriptions for Pinit's commands.'''
+class Language:
+	'''Base class for descriptions.'''
 
-	if language == 'fi':
-		usage_description = cmds.descs.usg.finnish.usage['desc']
-		usage = cmds.descs.usg.finnish.usage['usage']
-		opts = cmds.descs.usg.finnish.usage['opts']
-		cmd_descriptions = cmds.descs.cmd.finnish.__doc__
-	elif language == 'eng':
-		usage_description = cmds.descs.usg.english.usage['desc']
-		usage = cmds.descs.usg.english.usage['usage']
-		opts = cmds.descs.usg.english.usage['opts']
-		cmd_descriptions = cmds.descs.cmd.english.__doc__
+	def __init__(self, program: str, version: str):
+		self.program        : str = program
+		self.version        : str = version
+		self.pretty_program : str = program[0].upper() + program[1:].lower()
 
-	print('{} {}, {}'.format( pname[0].upper() + pname[1:].lower(), version, usage_description ))
-	print('{}: {} {}'.format( usage, pname, opts ))
-	print()
-	print('{}'.format( cmd_descriptions ))
+class Finnish(Language):
+	def descriptions(self):
+		descriptions = '''
+		{0} {1}, tehokas alustustyökalu.
+		Käyttö: {2} [valitsimet]...
+		
+		Komennot:
+			create <nimi>			Luo projekti <nimi>
+			
+		Valitsimet:
+			-h,  --help				Tulosta tämä viesti
+			-V,  --version			Tulosta Pinitin versio'''.format(self.pretty_program, self.version, self.program)
+
+		print( textwrap.dedent(descriptions).strip() )
+
+	def usage(self):
+		usage = 'Käyttö: {0} [valitsimet]...'.format(self.program)
+		print(usage)
+
+class English(Language):
+	def descriptions(self):
+		descriptions = '''
+		{0} {1}, efficient initialization tool.
+		Usage: {2} [options]...
+		
+		Commands:
+			create <name>			Create project <name>'''.format(self.pretty_program, self.version, self.program)
+
+		print( textwrap.dedent(descriptions) )
+
+	def usage(self):
+		usage = 'Usage: {0} [options]...'.format(self.program)
+		print(usage)
