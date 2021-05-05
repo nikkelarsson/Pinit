@@ -19,12 +19,16 @@ __program__  : str  = cfg.name
 __version__  : str  = cfg.version
 __language__ : str  = cfg.language
 
-if __language__ == 'fi':
-	descriptions = cmds.help.Finnish(__program__, __version__)
-elif __language__ == 'eng':
-	descriptions = cmds.help.English(__program__, __version__)
+def init_descriptions():
+	if __language__ == 'fi':
+		descriptions = cmds.help.Finnish(__program__, __version__)
+	elif __language__ == 'eng':
+		descriptions = cmds.help.English(__program__, __version__)
 
+# TODO: Clean this area up: separate parts into their own modules.
 def main():
+	init_descriptions()
+
 	if len(args) < 2:
 		descriptions.usage()
 		sys.exit(1)

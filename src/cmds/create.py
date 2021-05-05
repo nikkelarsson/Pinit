@@ -6,6 +6,7 @@ Desc : File creation procedures.
 
 import getpass
 import os
+import string
 
 # NOTE: pass arguments for ”*files” as a list or as a tuple!
 # This is, because files() tries to parse the *files
