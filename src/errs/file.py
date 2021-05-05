@@ -4,27 +4,27 @@ File : file.py
 Desc : File operation related errors.
 '''
 
-def exists(name, language='eng'):
+def exists(filename: str, language: str = 'eng'):
 	'''Give an error when trying to create a file
 	with a name that matches already existing file's name.'''
 
 	if language == 'fi':
-		msg = 'Virhe: ”{}” on jo olemassa'.format(name)
+		msg = 'Virhe: ”{}” on jo olemassa'.format(filename)
 	elif language == 'eng':
-		msg = 'Error: ”{}” already exists'.format(name)
+		msg = 'Error: ”{}” already exists'.format(filename)
 	print(msg)
 
-def invalid_filename(name, language='eng'):
+def invalid_filename(filename: str, language: str = 'eng'):
 	'''Give an error when attempting to create file
 	with invalid name.'''
 
 	if language == 'fi':
-		msg = 'Virhe: Huono nimeämiskäytäntö ”{}”'.format(name)
+		msg = 'Virhe: Huono nimeämiskäytäntö ”{}”'.format(filename)
 	elif language == 'eng':
-		msg = 'Error: Bad naming convention ”{}”'.format(name)
+		msg = 'Error: Bad naming convention ”{}”'.format(filename)
 	print(msg)
 
-def name_missing(language='eng'):
+def name_missing(language: str = 'eng'):
 	'''Give an error when file is missing a filename.'''
 
 	if language == 'fi':
@@ -33,7 +33,7 @@ def name_missing(language='eng'):
 		msg = 'Error: <name> missing'
 	print(msg)
 
-def not_found(path, language='eng'):
+def not_found(path: str, language: str = 'eng'):
 	'''Give an error when trying to create files to location
 	that doesn't exist.'''
 

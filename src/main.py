@@ -15,9 +15,9 @@ import sys
 args         : list = sys.argv
 commands     : dict = cmds.commands
 flags        : dict = cmds.flags
-__program__  : str = cfg.name
-__version__  : str = cfg.version
-__language__ : str = cfg.language
+__program__  : str  = cfg.name
+__version__  : str  = cfg.version
+__language__ : str  = cfg.language
 
 if __language__ == 'fi':
 	descriptions = cmds.help.Finnish(__program__, __version__)
@@ -47,12 +47,12 @@ def main():
 			if args[2:]:
 				if args[2] == commands['create']['long']:
 					if args[3:]:
-						verbose_message = cmds.create.files(args[3:], language=__language__, verbose=True)
-						if verbose_message == 'INVALID_FILENAME_USED':
-							errs.file.invalid_filename(name=args[3], language=__language__)
+						verbose_message = cmds.create.files(args[3:], __language__, verbose=True)
+						if verbose_message == 'INVALID_FILENAME':
+							errs.file.invalid_filename(args[3], __language__)
 							sys.exit(1)
 						elif verbose_message == 'FILE_ALREADY_EXISTS':
-							errs.file.exists(name=args[3], language=__language__)
+							errs.file.exists(args[3], __language__)
 							sys.exit(1)
 						elif verbose_message == 'FILE_NOT_FOUND':
 							errs.file.not_found(path=args[3], language=__language__)
