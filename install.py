@@ -1,3 +1,4 @@
+
 '''Installation script for Pinit.
 
 If you wish, you can change the location for the installation. Remember
@@ -7,11 +8,11 @@ import getpass
 import os
 import sys
 
-user = getpass.getuser()
-install_location = '/Users/{}/Projects/bin/'.format(user)
-args = sys.argv
+user: str = getpass.getuser()
+install_location: str = '/Users/{}/Projects/bin/'.format(user)
+args: list = sys.argv
 
-def install(python_version='3.6'):
+def install(python_version: str = '3.6') -> None:
 	'''Compile and symlink Pinit.'''
 	
 	comp_args = '--follow-imports --remove-output -o pinit'

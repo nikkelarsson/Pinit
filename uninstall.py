@@ -1,13 +1,14 @@
+
 '''Uninstall script for Pinit.'''
 
 import getpass
 import os
 import sys
 
-user = getpass.getuser()
-location = '/Users/{}/Projects/bin'.format(user)
+user: str = getpass.getuser()
+location: str = '/Users/{}/Projects/bin'.format(user)
 
-def uninstall():
+def uninstall() -> None:
 	'''Uninstall Pinit by deleting its symlink.'''
 
 	try:

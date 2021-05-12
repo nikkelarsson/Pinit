@@ -24,7 +24,7 @@ if __language__ == 'fi':
 elif __language__ == 'eng':
 	descriptions = cmds.help.English(__program__, __version__)
 
-def main():
+def main() -> None:
 	if len(args) < 2:
 		descriptions.usage()
 		sys.exit(1)

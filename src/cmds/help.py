@@ -1,3 +1,4 @@
+
 '''
 File : help.py  
 Desc : Command and usage descriptions.
@@ -24,7 +25,7 @@ class Language:
 		self.pretty_program : str = program[0].upper() + program[1:].lower()
 
 class Finnish(Language):
-	def descriptions(self):
+	def descriptions(self) -> None:
 		descriptions = '''
 		{0} {1}, tehokas alustustyökalu.
 		Käyttö: {2} [valitsimet]...
@@ -38,12 +39,12 @@ class Finnish(Language):
 
 		print( textwrap.dedent(descriptions).strip() )
 
-	def usage(self):
+	def usage(self) -> None:
 		usage = 'Käyttö: {0} [valitsimet]...'.format(self.program)
 		print(usage)
 
 class English(Language):
-	def descriptions(self):
+	def descriptions(self) -> None:
 		descriptions = '''
 		{0} {1}, efficient initialization tool.
 		Usage: {2} [options]...
@@ -53,6 +54,6 @@ class English(Language):
 
 		print( textwrap.dedent(descriptions) )
 
-	def usage(self):
+	def usage(self) -> None:
 		usage = 'Usage: {0} [options]...'.format(self.program)
 		print(usage)
