@@ -12,13 +12,13 @@ import os
 import requests
 import sys
 
-args     : list = sys.argv
-commands : dict = cmds.commands
-flags    : dict = cmds.flags
+args: list = sys.argv
+commands: dict = cmds.commands
+flags: dict = cmds.flags
 
-PROGRAM  : str  = cfg.name
-VERSION  : str  = cfg.version
-LANGUAGE : str  = cfg.language
+PROGRAM: str = cfg.name
+VERSION: str = cfg.version
+LANGUAGE: str = cfg.language
 
 def init_descriptions() -> None:
 	if LANGUAGE == 'fi':

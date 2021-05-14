@@ -20,9 +20,9 @@ class Language:
 	'''Base class for descriptions.'''
 
 	def __init__(self, program: str, version: str):
-		self.program        : str = program
-		self.version        : str = version
-		self.pretty_program : str = program[0].upper() + program[1:].lower()
+		self.program: str = program
+		self.version: str = version
+		self.pretty_program: str = program[0].upper() + program[1:].lower()
 
 class Finnish(Language):
 	def descriptions(self) -> None:

@@ -1,7 +1,7 @@
 
 '''
-file : command.py  
-desc : Command related errors.
+File : command.py  
+Desc : Command related errors.
 '''
 
 def is_invalid(cmd: str, language: str='eng') -> None:

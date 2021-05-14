@@ -12,14 +12,14 @@ import string
 # This is, because files() tries to parse the *files
 # argument as a list (or tuple): giving *files just a single variable
 # as an argument would make create() work unexpectedly.
-def files(*files: tuple, language: str='eng', verbose: bool = False,
+def files(*files: tuple, language: str='eng', verbose: bool=False,
 		project_type: str='python', git: bool=False) -> str:
 
 	'''Create the files that make the project, like the root dir etc.'''
 
-	count       : int = 0
-	username    : str = getpass.getuser()
-	fwd_slashes : int = 0
+	count: int = 0
+	username: str = getpass.getuser()
+	fwd_slashes: int = 0
 
 	# TODO: 1. Make sure filename is valid. [CHECK]
 	# TODO: 2. If creating in other location than cwd make sure that the location actually exists.
@@ -28,17 +28,11 @@ def files(*files: tuple, language: str='eng', verbose: bool = False,
 		if count == 0:
 
 			# Allow using the ”~/” abbreviation: it's nicer to write less.
-			if new_file[0][0:1] == '~/':
+			if new_file.startswith('~/'):
 				new_file.replace('~/', '/Users/{}/'.format(username))
 
 			# To avoid problems, prohibit the use of ”-” as a prefix in filenames.
-			if new_file[0][0] == '-':
-				return 'INVALID_FILENAME'
-
-			# I dunno is this even needed, as the expression above
-			# kind of already considers a filename an error, if
-			# just the first letter is a dash?
-			elif new_file[0][0:1] == '-':
+			if new_file.startswith('-'):
 				return 'INVALID_FILENAME'
 
 			# Check if file is created in location other than cwd.
