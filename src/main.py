@@ -27,7 +27,7 @@ def init_descriptions() -> None:
 		descriptions = cmds.help.English(PROGRAM, VERSION)
 
 
-def main(arguments: list = args) -> None:
+def main(arguments: list=args) -> None:
 
 	init_descriptions()
 
