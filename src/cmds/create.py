@@ -12,13 +12,8 @@ import string
 # This is, because files() tries to parse the *files
 # argument as a list (or tuple): giving *files just a single variable
 # as an argument would make create() work unexpectedly.
-def files(
-		*files       : tuple,
-		language     : str  = 'eng',
-		verbose      : bool = False,
-		project_type : str  = 'python',
-		git          : bool = False
-		) -> str:
+def files(*files: tuple, language: str='eng', verbose: bool = False,
+		project_type: str='python', git: bool=False) -> str:
 
 	'''Create the files that make the project, like the root dir etc.'''
 
