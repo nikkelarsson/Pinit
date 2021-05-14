@@ -1,8 +1,9 @@
+
 '''
 File : __init__.py
 Desc : Basic configurations.
 '''
 
-name     : str = 'pinit'
-version  : str = '0.0'
-language : str = 'fi'
+NAME     : str = 'pinit'
+VERSION  : str = '0.0'
+LANGUAGE : str = 'fi'
