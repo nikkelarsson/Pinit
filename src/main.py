@@ -20,6 +20,7 @@ PROGRAM: str = cfg.name
 VERSION: str = cfg.version
 LANGUAGE: str = cfg.language
 
+
 def init_descriptions() -> None:
 	if LANGUAGE == 'fi':
 		descriptions = cmds.help.Finnish(PROGRAM, VERSION)
@@ -75,6 +76,7 @@ def main(arguments: list=args) -> None:
 					sys.exit(1)
 			else:
 				sys.exit(1)
+
 
 if __name__ == '__main__':
 	main()

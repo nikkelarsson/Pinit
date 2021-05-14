@@ -4,6 +4,7 @@ File : command.py
 Desc : Command related errors.
 '''
 
+
 def is_invalid(cmd: str, language: str='eng') -> None:
 	'''Error given when a command presented is invalid.'''
 

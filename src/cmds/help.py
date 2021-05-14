@@ -16,6 +16,7 @@ Desc : Command and usage descriptions.
 
 import textwrap
 
+
 class Language:
 	'''Base class for descriptions.'''
 
@@ -23,6 +24,7 @@ class Language:
 		self.program: str = program
 		self.version: str = version
 		self.pretty_program: str = program[0].upper() + program[1:].lower()
+
 
 class Finnish(Language):
 	def descriptions(self) -> None:
@@ -42,6 +44,7 @@ class Finnish(Language):
 	def usage(self) -> None:
 		usage = 'Käyttö: {0} [valitsimet]...'.format(self.program)
 		print(usage)
+
 
 class English(Language):
 	def descriptions(self) -> None:

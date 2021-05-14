@@ -4,6 +4,7 @@ File : file.py
 Desc : File operation related errors.
 '''
 
+
 def exists(filename: str, language: str='eng') -> None:
 	'''Give an error when trying to create a file
 	with a name that matches already existing file's name.'''
@@ -13,6 +14,7 @@ def exists(filename: str, language: str='eng') -> None:
 	elif language == 'eng':
 		msg = 'Error: ”{}” already exists'.format(filename)
 	print(msg)
+
 
 def invalid_filename(filename: str, language: str='eng') -> None:
 	'''Give an error when attempting to create file
@@ -24,6 +26,7 @@ def invalid_filename(filename: str, language: str='eng') -> None:
 		msg = 'Error: Bad naming convention ”{}”'.format(filename)
 	print(msg)
 
+
 def name_missing(language: str='eng') -> None:
 	'''Give an error when file is missing a filename.'''
 
@@ -32,6 +35,7 @@ def name_missing(language: str='eng') -> None:
 	elif language == 'eng':
 		msg = 'Error: <name> missing'
 	print(msg)
+
 
 def not_found(path: str, language: str='eng') -> None:
 	'''Give an error when trying to create files to location
