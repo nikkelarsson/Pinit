@@ -1,68 +1,73 @@
 
-'''Installation script for Pinit.
+"""
+Installation script for Pinit.
 
 If you wish, you can change the location for the installation. Remember
-to also add the installation location to your PATH environment variable.'''
+to also add the installation location to your PATH environment variable.
+"""
 
 import getpass
 import os
 import sys
 
-user: str = getpass.getuser()
-install_location: str = '/Users/{}/Projects/bin/'.format(user)
+USER: str = getpass.getuser()
+PINIT_DEST: str = "/Users/{}/Projects/bin/".format(user)
+MAN_PAGE_SRC: str = "doc/pinit.1"
+MAN_PAGE_DEST: str = "/usr/local/share/man/man1"
 args: list = sys.argv
 
-def install(python_version: str = '3.6') -> None:
-	'''Compile and symlink Pinit.'''
-	
-	comp_args = '--follow-imports --remove-output -o pinit'
-	bin_dir_contents = os.listdir(install_location)
-	src_dir_contents = os.listdir()
-	src_dir_count = 0
-	bin_dir_count = 0
 
-	# Check if pinit is already compiled into cwd.
-	# Reason: If a binary already exists it's not necessary to re-compile
-	# (unless changes has been made to the program and new version would like
-	# to be compiled). In this case the installation location
-	# /Users/<username>/Projects/bin/ is scanned, and if no symlink to the
-	# binary is found there then one can be created. In situation where
-	# binary inside cwd isn't found, compiling can be done, followed by symlinking:
-	# this symlinking can be performed by forcing it.
-	for i in src_dir_contents:
-		if i == 'pinit':
-			src_dir_count += 1
+def install(python_version: str = "3.6") -> None:
+	"""Compile and symlink Pinit."""
+    compilation_args: str = "--follow-imports --remove-output -o pinit"
+    pinit_dest_dir_contents: list = os.listdir(PINIT_DEST)
+    pinit_src_dir_contents: list = os.listdir()
+    man_page_dest_contents: list = os.listdir(MAN_PAGE_DEST)
+    man_page_exists: bool = False
+    pinit_binary_exists: bool = False
+    pinit_symlink_exists: bool = False
 
-	if src_dir_count == 0:
-		os.system('python{} -m nuitka {} src/main.py'.format(python_version, comp_args))
+    # Check if..
+    # - man-pages are installed
+    # - pinit has been compiled
+    # - pinit has been symlinked
+    for manual in man_page_dest_contents:
+        if manual == "pinit.1":
+            man_page_exists = True
+            break
+	for binary_file in pinit_src_dir_contents:
+		if binary_file == "pinit":
+			pinit_binary_exists = True
+            break
+	for symlink in pinit_dest_dir_contents:
+		if symlink == "pinit":
+            pinit_symlink_exists = True
+            break
 
-	elif src_dir_count == 1:
-		print('Found existing binary ”pinit” in current directory.')
-		print('Would you like to compile anyway? (yes / no)')
+    # Compile and symlink pinit, and symlink man-pages, if necessary.
+    if not man_page_exists:
+        os.system("ln -sf $(pwd)/{} {}".format(MAN_PAGE_SRC, MAN_PAGE_DEST))
+    if not pinit_binary_exists:
+        os.system("python{} -m nuitka {} src/main.py".format(python_version, compilation_args))
+    else:
+		print("Found existing binary ”pinit” in current directory.")
+        print("There is no need to compile, unless updates have been made.")
+		print("Would you like to compile anyway? (yes / no) ", end="")
 		while True:
 			try:
-				comp_anyway = input('>>> ')
+				compile_pinit = input()
 			except KeyboardInterrupt:
 				sys.exit(1)
-
-			if comp_anyway == 'yes':
-				os.system('python{} -m nuitka {} src/main.py'.format(python_version, comp_args))
+			if compile_pinit == "yes":
+				os.system("python{} -m nuitka {} src/main.py".format(python_version, compilation_args))
 				break
-			elif comp_anyway == 'no':
+			elif comp_anyway == "no":
 				break
 			else:
 				continue
+    if not pinit_symlink_exists:
+        os.system("ln -sf $(pwd)/pinit {}".format(PINIT_DEST))
 
-	for i in bin_dir_contents:
-		if i == 'pinit':
-			bin_dir_count += 1
 
-	if bin_dir_count == 0:
-		os.system('ln -sf "$(pwd)/pinit" {}'.format(install_location))
-
-	elif bin_dir_count == 1:
-		#os.system('ln -sf "$(pwd)/pinit" {}'.format(install_location))
-		pass
-
-if __name__ == '__main__':
+if __name__ == "__main__":
 	install()
