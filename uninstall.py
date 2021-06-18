@@ -1,21 +1,28 @@
 
-'''Uninstall script for Pinit.'''
+"""Uninstall script for Pinit."""
 
 import getpass
 import os
 import sys
 
-user: str = getpass.getuser()
-location: str = '/Users/{}/Projects/bin'.format(user)
+USER: str = getpass.getuser()
+PINIT_DEST_LOCATION: str = "/Users/{}/Projects/bin".format(user)
+MAN_PAGE_DEST: str = "/usr/local/share/man/man1"
+
 
 def uninstall() -> None:
-	'''Uninstall Pinit by deleting its symlink.'''
-
+	"""Uninstall Pinit and all the associated
+    files by deleting their symlinks."""
 	try:
-		os.system('rm {}/pinit'.format(location))
+        print("Attempting to uninstall pinit...")
+		os.system("rm {}/pinit".format(location))
 	except:
-		print('No file called ”pinit” exists in: {}'.format(location))
-		sys.exit(1)
+		sys.exit("”Pinit” is not installed.")
+    try:
+        os.system("rm {}/pinit.1".format(MAN_PAGE_DEST))
+    except:
+        pass
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
 	uninstall()
