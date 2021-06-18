@@ -1,10 +1,11 @@
 
-'''
-File : version.py  
-Desc : Version description.
-'''
+"""
+ *  File: version.py  
+ *  Desc: Version description command.
+ *  Auth: Niklas Larsson
+"""
 
 
 def get(program: str, version: str) -> None:
-	'''Print Pinit's current version.'''
-	print('{0} {1}'.format( program[0].upper() + program[1:].lower(), version ))
+	"""Print program version."""
+	print('{0} {1}'.format(program.title(), version))
